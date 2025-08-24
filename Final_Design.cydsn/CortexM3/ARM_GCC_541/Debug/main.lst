@@ -1,0 +1,984 @@
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.main,"ax",%progbits
+  20              		.align	2
+  21              		.global	main
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	main, %function
+  25              	main:
+  26              	.LFB63:
+  27              		.file 1 "main.c"
+   1:main.c        **** /**
+   2:main.c        ****  * @file main.c
+   3:main.c        ****  * @brief Main control loop for state-based ADC sampling and UART communication.
+   4:main.c        ****  * 
+   5:main.c        ****  * This file contains the main loop that manages ADC sampling based on button input
+   6:main.c        ****  * and transfers data over UART upon host command. LED indicators show the current state.
+   7:main.c        ****  */
+   8:main.c        **** 
+   9:main.c        **** #include "project.h"
+  10:main.c        **** #include "functions.h"
+  11:main.c        **** 
+  12:main.c        **** 
+  13:main.c        **** /**
+  14:main.c        ****  * @brief Entry point of the program.
+  15:main.c        ****  * 
+  16:main.c        ****  * Initializes hardware and handles state machine logic:
+  17:main.c        ****  * - IDLE: Waiting for button press.
+  18:main.c        ****  * - SAMPLING: ADC data acquisition.
+  19:main.c        ****  * - UART_TRANSFER: Send ADC data via UART.
+  20:main.c        ****  */
+  21:main.c        **** int main(void)
+  22:main.c        **** {
+  28              		.loc 1 22 0
+  29              		.cfi_startproc
+  30              		@ Volatile: function does not return.
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 2
+
+
+  36              		.cfi_offset 14, -4
+  23:main.c        ****     CyGlobalIntEnable;
+  37              		.loc 1 23 0
+  38              		.syntax unified
+  39              	@ 23 "main.c" 1
+  40 0002 62B6     		CPSIE   i
+  41              	@ 0 "" 2
+  24:main.c        ****     initializeHardware();
+  42              		.loc 1 24 0
+  43              		.thumb
+  44              		.syntax unified
+  45 0004 FFF7FEFF 		bl	initializeHardware
+  46              	.LVL0:
+  47              	.L3:
+  25:main.c        **** 
+  26:main.c        ****     for(;;)
+  27:main.c        ****     {
+  28:main.c        ****         switch(state)
+  48              		.loc 1 28 0
+  49 0008 2B4B     		ldr	r3, .L12
+  50 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  51 000c 012B     		cmp	r3, #1
+  52 000e 1BD0     		beq	.L4
+  53 0010 13B1     		cbz	r3, .L5
+  54 0012 022B     		cmp	r3, #2
+  55 0014 2FD0     		beq	.L6
+  56 0016 F7E7     		b	.L3
+  57              	.L5:
+  29:main.c        ****         {
+  30:main.c        ****             case IDLE:
+  31:main.c        ****                 updateLEDs(1, 0, 0);         /**< Red LED: IDLE */
+  58              		.loc 1 31 0
+  59 0018 0022     		movs	r2, #0
+  60 001a 1146     		mov	r1, r2
+  61 001c 0120     		movs	r0, #1
+  62 001e FFF7FEFF 		bl	updateLEDs
+  63              	.LVL1:
+  32:main.c        ****                 sampleCount = 0;
+  64              		.loc 1 32 0
+  65 0022 0023     		movs	r3, #0
+  66 0024 254A     		ldr	r2, .L12+4
+  67 0026 1370     		strb	r3, [r2]
+  33:main.c        ****                 buttonPressed = 0;
+  68              		.loc 1 33 0
+  69 0028 254C     		ldr	r4, .L12+8
+  70 002a 2370     		strb	r3, [r4]
+  34:main.c        ****                 flushRxBuffer();             /**< Clear UART RX buffer */
+  71              		.loc 1 34 0
+  72 002c FFF7FEFF 		bl	flushRxBuffer
+  73              	.LVL2:
+  35:main.c        ****                 
+  36:main.c        ****                 if(buttonPressed == 1)
+  74              		.loc 1 36 0
+  75 0030 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  76 0032 DBB2     		uxtb	r3, r3
+  77 0034 012B     		cmp	r3, #1
+  78 0036 E7D1     		bne	.L3
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 3
+
+
+  37:main.c        ****                 {
+  38:main.c        ****                     CyDelay(300);            /**< Debounce delay */
+  79              		.loc 1 38 0
+  80 0038 4FF49670 		mov	r0, #300
+  81 003c FFF7FEFF 		bl	CyDelay
+  82              	.LVL3:
+  39:main.c        ****                     state = SAMPLING;
+  83              		.loc 1 39 0
+  84 0040 0122     		movs	r2, #1
+  85 0042 1D4B     		ldr	r3, .L12
+  86 0044 1A70     		strb	r2, [r3]
+  87 0046 DFE7     		b	.L3
+  88              	.L4:
+  40:main.c        ****                 }
+  41:main.c        ****                 break;
+  42:main.c        **** 
+  43:main.c        ****             case SAMPLING:
+  44:main.c        ****                 updateLEDs(0, 1, 0);         /**< Orange LED: Sampling */
+  89              		.loc 1 44 0
+  90 0048 0022     		movs	r2, #0
+  91 004a 0121     		movs	r1, #1
+  92 004c 1046     		mov	r0, r2
+  93 004e FFF7FEFF 		bl	updateLEDs
+  94              	.LVL4:
+  45:main.c        ****                 sampleADC();                 /**< Acquire 1024 ADC samples */
+  95              		.loc 1 45 0
+  96 0052 FFF7FEFF 		bl	sampleADC
+  97              	.LVL5:
+  46:main.c        ****                 
+  47:main.c        ****                 if (uart_s_received)         /**< If 's' received from matlab */
+  98              		.loc 1 47 0
+  99 0056 1B4B     		ldr	r3, .L12+12
+ 100 0058 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 101 005a 13F0FF0F 		tst	r3, #255
+ 102 005e 06D0     		beq	.L8
+  48:main.c        ****                 {
+  49:main.c        ****                     uart_s_received = 0;
+ 103              		.loc 1 49 0
+ 104 0060 0022     		movs	r2, #0
+ 105 0062 184B     		ldr	r3, .L12+12
+ 106 0064 1A70     		strb	r2, [r3]
+  50:main.c        ****                     state = UART_TRANSFER;
+ 107              		.loc 1 50 0
+ 108 0066 0222     		movs	r2, #2
+ 109 0068 134B     		ldr	r3, .L12
+ 110 006a 1A70     		strb	r2, [r3]
+ 111 006c CCE7     		b	.L3
+ 112              	.L8:
+  51:main.c        ****                 }
+  52:main.c        **** 
+  53:main.c        ****                 else
+  54:main.c        ****                 {
+  55:main.c        ****                     state = IDLE;           /**< Timeout: revert to IDLE */
+ 113              		.loc 1 55 0
+ 114 006e 0022     		movs	r2, #0
+ 115 0070 114B     		ldr	r3, .L12
+ 116 0072 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 4
+
+
+ 117 0074 C8E7     		b	.L3
+ 118              	.L6:
+  56:main.c        ****                 }
+  57:main.c        ****                 break;
+  58:main.c        **** 
+  59:main.c        ****             case UART_TRANSFER:
+  60:main.c        ****                 updateLEDs(0, 0, 1);         /**< Green LED: UART Transfer */
+ 119              		.loc 1 60 0
+ 120 0076 0122     		movs	r2, #1
+ 121 0078 0021     		movs	r1, #0
+ 122 007a 0846     		mov	r0, r1
+ 123 007c FFF7FEFF 		bl	updateLEDs
+ 124              	.LVL6:
+  61:main.c        ****                 uartSendBuffer();            /**< Send ADC samples over UART */
+ 125              		.loc 1 61 0
+ 126 0080 FFF7FEFF 		bl	uartSendBuffer
+ 127              	.LVL7:
+  62:main.c        ****                 sampleCount++;
+ 128              		.loc 1 62 0
+ 129 0084 0D4A     		ldr	r2, .L12+4
+ 130 0086 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 131 0088 0133     		adds	r3, r3, #1
+ 132 008a DBB2     		uxtb	r3, r3
+ 133 008c 1370     		strb	r3, [r2]
+  63:main.c        ****                 
+  64:main.c        ****                 if (uart_o_received)         /**< If 'o' received from matlab */
+ 134              		.loc 1 64 0
+ 135 008e 0E4A     		ldr	r2, .L12+16
+ 136 0090 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 137 0092 12F0FF0F 		tst	r2, #255
+ 138 0096 0BD0     		beq	.L9
+  65:main.c        ****                 {
+  66:main.c        ****                     uart_o_received = 0;
+ 139              		.loc 1 66 0
+ 140 0098 0021     		movs	r1, #0
+ 141 009a 0B4A     		ldr	r2, .L12+16
+ 142 009c 1170     		strb	r1, [r2]
+  67:main.c        ****                     if (sampleCount >= 10)
+ 143              		.loc 1 67 0
+ 144 009e 092B     		cmp	r3, #9
+ 145 00a0 02D9     		bls	.L10
+  68:main.c        ****                         state = IDLE;
+ 146              		.loc 1 68 0
+ 147 00a2 054B     		ldr	r3, .L12
+ 148 00a4 1970     		strb	r1, [r3]
+ 149 00a6 AFE7     		b	.L3
+ 150              	.L10:
+  69:main.c        ****                     else
+  70:main.c        ****                         state = SAMPLING;
+ 151              		.loc 1 70 0
+ 152 00a8 0122     		movs	r2, #1
+ 153 00aa 034B     		ldr	r3, .L12
+ 154 00ac 1A70     		strb	r2, [r3]
+ 155 00ae ABE7     		b	.L3
+ 156              	.L9:
+  71:main.c        ****                 }
+  72:main.c        ****                 else
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 5
+
+
+  73:main.c        ****                 {
+  74:main.c        ****                     state = IDLE;
+ 157              		.loc 1 74 0
+ 158 00b0 0022     		movs	r2, #0
+ 159 00b2 014B     		ldr	r3, .L12
+ 160 00b4 1A70     		strb	r2, [r3]
+ 161 00b6 A7E7     		b	.L3
+ 162              	.L13:
+ 163              		.align	2
+ 164              	.L12:
+ 165 00b8 00000000 		.word	state
+ 166 00bc 00000000 		.word	sampleCount
+ 167 00c0 00000000 		.word	buttonPressed
+ 168 00c4 00000000 		.word	uart_s_received
+ 169 00c8 00000000 		.word	uart_o_received
+ 170              		.cfi_endproc
+ 171              	.LFE63:
+ 172              		.size	main, .-main
+ 173              		.text
+ 174              	.Letext0:
+ 175              		.file 2 "d:\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\arm-none-eabi\\include\\mac
+ 176              		.file 3 "d:\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\arm-none-eabi\\include\\sys
+ 177              		.file 4 "functions.h"
+ 178              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 179              		.file 6 "Generated_Source\\PSoC5/CyLib.h"
+ 180              		.section	.debug_info,"",%progbits
+ 181              	.Ldebug_info0:
+ 182 0000 1A020000 		.4byte	0x21a
+ 183 0004 0400     		.2byte	0x4
+ 184 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 185 000a 04       		.byte	0x4
+ 186 000b 01       		.uleb128 0x1
+ 187 000c D9000000 		.4byte	.LASF34
+ 188 0010 0C       		.byte	0xc
+ 189 0011 3C020000 		.4byte	.LASF35
+ 190 0015 0A000000 		.4byte	.LASF36
+ 191 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 192 001d 00000000 		.4byte	0
+ 193 0021 00000000 		.4byte	.Ldebug_line0
+ 194 0025 02       		.uleb128 0x2
+ 195 0026 01       		.byte	0x1
+ 196 0027 06       		.byte	0x6
+ 197 0028 83020000 		.4byte	.LASF0
+ 198 002c 03       		.uleb128 0x3
+ 199 002d 00000000 		.4byte	.LASF4
+ 200 0031 02       		.byte	0x2
+ 201 0032 1D       		.byte	0x1d
+ 202 0033 37000000 		.4byte	0x37
+ 203 0037 02       		.uleb128 0x2
+ 204 0038 01       		.byte	0x1
+ 205 0039 08       		.byte	0x8
+ 206 003a AF010000 		.4byte	.LASF1
+ 207 003e 02       		.uleb128 0x2
+ 208 003f 02       		.byte	0x2
+ 209 0040 05       		.byte	0x5
+ 210 0041 54020000 		.4byte	.LASF2
+ 211 0045 02       		.uleb128 0x2
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 6
+
+
+ 212 0046 02       		.byte	0x2
+ 213 0047 07       		.byte	0x7
+ 214 0048 89010000 		.4byte	.LASF3
+ 215 004c 03       		.uleb128 0x3
+ 216 004d 8A000000 		.4byte	.LASF5
+ 217 0051 02       		.byte	0x2
+ 218 0052 3F       		.byte	0x3f
+ 219 0053 57000000 		.4byte	0x57
+ 220 0057 02       		.uleb128 0x2
+ 221 0058 04       		.byte	0x4
+ 222 0059 05       		.byte	0x5
+ 223 005a 6E020000 		.4byte	.LASF6
+ 224 005e 02       		.uleb128 0x2
+ 225 005f 04       		.byte	0x4
+ 226 0060 07       		.byte	0x7
+ 227 0061 77010000 		.4byte	.LASF7
+ 228 0065 02       		.uleb128 0x2
+ 229 0066 08       		.byte	0x8
+ 230 0067 05       		.byte	0x5
+ 231 0068 25020000 		.4byte	.LASF8
+ 232 006c 02       		.uleb128 0x2
+ 233 006d 08       		.byte	0x8
+ 234 006e 07       		.byte	0x7
+ 235 006f F3010000 		.4byte	.LASF9
+ 236 0073 04       		.uleb128 0x4
+ 237 0074 04       		.byte	0x4
+ 238 0075 05       		.byte	0x5
+ 239 0076 696E7400 		.ascii	"int\000"
+ 240 007a 02       		.uleb128 0x2
+ 241 007b 04       		.byte	0x4
+ 242 007c 07       		.byte	0x7
+ 243 007d D7010000 		.4byte	.LASF10
+ 244 0081 03       		.uleb128 0x3
+ 245 0082 0A020000 		.4byte	.LASF11
+ 246 0086 03       		.byte	0x3
+ 247 0087 18       		.byte	0x18
+ 248 0088 2C000000 		.4byte	0x2c
+ 249 008c 03       		.uleb128 0x3
+ 250 008d AC000000 		.4byte	.LASF12
+ 251 0091 03       		.byte	0x3
+ 252 0092 2C       		.byte	0x2c
+ 253 0093 4C000000 		.4byte	0x4c
+ 254 0097 02       		.uleb128 0x2
+ 255 0098 04       		.byte	0x4
+ 256 0099 04       		.byte	0x4
+ 257 009a BA000000 		.4byte	.LASF13
+ 258 009e 02       		.uleb128 0x2
+ 259 009f 08       		.byte	0x8
+ 260 00a0 04       		.byte	0x4
+ 261 00a1 BD010000 		.4byte	.LASF14
+ 262 00a5 02       		.uleb128 0x2
+ 263 00a6 01       		.byte	0x1
+ 264 00a7 08       		.byte	0x8
+ 265 00a8 43020000 		.4byte	.LASF15
+ 266 00ac 02       		.uleb128 0x2
+ 267 00ad 08       		.byte	0x8
+ 268 00ae 04       		.byte	0x4
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 7
+
+
+ 269 00af 77020000 		.4byte	.LASF16
+ 270 00b3 02       		.uleb128 0x2
+ 271 00b4 04       		.byte	0x4
+ 272 00b5 07       		.byte	0x7
+ 273 00b6 1C020000 		.4byte	.LASF17
+ 274 00ba 05       		.uleb128 0x5
+ 275 00bb 81000000 		.4byte	0x81
+ 276 00bf 06       		.uleb128 0x6
+ 277 00c0 01       		.byte	0x1
+ 278 00c1 37000000 		.4byte	0x37
+ 279 00c5 04       		.byte	0x4
+ 280 00c6 10       		.byte	0x10
+ 281 00c7 DE000000 		.4byte	0xde
+ 282 00cb 07       		.uleb128 0x7
+ 283 00cc 94000000 		.4byte	.LASF18
+ 284 00d0 00       		.byte	0
+ 285 00d1 07       		.uleb128 0x7
+ 286 00d2 33020000 		.4byte	.LASF19
+ 287 00d6 01       		.byte	0x1
+ 288 00d7 07       		.uleb128 0x7
+ 289 00d8 8F020000 		.4byte	.LASF20
+ 290 00dc 02       		.byte	0x2
+ 291 00dd 00       		.byte	0
+ 292 00de 03       		.uleb128 0x3
+ 293 00df 9C010000 		.4byte	.LASF21
+ 294 00e3 04       		.byte	0x4
+ 295 00e4 10       		.byte	0x10
+ 296 00e5 BF000000 		.4byte	0xbf
+ 297 00e9 08       		.uleb128 0x8
+ 298 00ea C4010000 		.4byte	.LASF37
+ 299 00ee 01       		.byte	0x1
+ 300 00ef 15       		.byte	0x15
+ 301 00f0 73000000 		.4byte	0x73
+ 302 00f4 00000000 		.4byte	.LFB63
+ 303 00f8 CC000000 		.4byte	.LFE63-.LFB63
+ 304 00fc 01       		.uleb128 0x1
+ 305 00fd 9C       		.byte	0x9c
+ 306 00fe 93010000 		.4byte	0x193
+ 307 0102 09       		.uleb128 0x9
+ 308 0103 08000000 		.4byte	.LVL0
+ 309 0107 DB010000 		.4byte	0x1db
+ 310 010b 0A       		.uleb128 0xa
+ 311 010c 22000000 		.4byte	.LVL1
+ 312 0110 E6010000 		.4byte	0x1e6
+ 313 0114 28010000 		.4byte	0x128
+ 314 0118 0B       		.uleb128 0xb
+ 315 0119 01       		.uleb128 0x1
+ 316 011a 50       		.byte	0x50
+ 317 011b 01       		.uleb128 0x1
+ 318 011c 31       		.byte	0x31
+ 319 011d 0B       		.uleb128 0xb
+ 320 011e 01       		.uleb128 0x1
+ 321 011f 51       		.byte	0x51
+ 322 0120 01       		.uleb128 0x1
+ 323 0121 30       		.byte	0x30
+ 324 0122 0B       		.uleb128 0xb
+ 325 0123 01       		.uleb128 0x1
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 8
+
+
+ 326 0124 52       		.byte	0x52
+ 327 0125 01       		.uleb128 0x1
+ 328 0126 30       		.byte	0x30
+ 329 0127 00       		.byte	0
+ 330 0128 09       		.uleb128 0x9
+ 331 0129 30000000 		.4byte	.LVL2
+ 332 012d F1010000 		.4byte	0x1f1
+ 333 0131 0A       		.uleb128 0xa
+ 334 0132 40000000 		.4byte	.LVL3
+ 335 0136 FC010000 		.4byte	0x1fc
+ 336 013a 46010000 		.4byte	0x146
+ 337 013e 0B       		.uleb128 0xb
+ 338 013f 01       		.uleb128 0x1
+ 339 0140 50       		.byte	0x50
+ 340 0141 03       		.uleb128 0x3
+ 341 0142 0A       		.byte	0xa
+ 342 0143 2C01     		.2byte	0x12c
+ 343 0145 00       		.byte	0
+ 344 0146 0A       		.uleb128 0xa
+ 345 0147 52000000 		.4byte	.LVL4
+ 346 014b E6010000 		.4byte	0x1e6
+ 347 014f 63010000 		.4byte	0x163
+ 348 0153 0B       		.uleb128 0xb
+ 349 0154 01       		.uleb128 0x1
+ 350 0155 50       		.byte	0x50
+ 351 0156 01       		.uleb128 0x1
+ 352 0157 30       		.byte	0x30
+ 353 0158 0B       		.uleb128 0xb
+ 354 0159 01       		.uleb128 0x1
+ 355 015a 51       		.byte	0x51
+ 356 015b 01       		.uleb128 0x1
+ 357 015c 31       		.byte	0x31
+ 358 015d 0B       		.uleb128 0xb
+ 359 015e 01       		.uleb128 0x1
+ 360 015f 52       		.byte	0x52
+ 361 0160 01       		.uleb128 0x1
+ 362 0161 30       		.byte	0x30
+ 363 0162 00       		.byte	0
+ 364 0163 09       		.uleb128 0x9
+ 365 0164 56000000 		.4byte	.LVL5
+ 366 0168 07020000 		.4byte	0x207
+ 367 016c 0A       		.uleb128 0xa
+ 368 016d 80000000 		.4byte	.LVL6
+ 369 0171 E6010000 		.4byte	0x1e6
+ 370 0175 89010000 		.4byte	0x189
+ 371 0179 0B       		.uleb128 0xb
+ 372 017a 01       		.uleb128 0x1
+ 373 017b 50       		.byte	0x50
+ 374 017c 01       		.uleb128 0x1
+ 375 017d 30       		.byte	0x30
+ 376 017e 0B       		.uleb128 0xb
+ 377 017f 01       		.uleb128 0x1
+ 378 0180 51       		.byte	0x51
+ 379 0181 01       		.uleb128 0x1
+ 380 0182 30       		.byte	0x30
+ 381 0183 0B       		.uleb128 0xb
+ 382 0184 01       		.uleb128 0x1
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 9
+
+
+ 383 0185 52       		.byte	0x52
+ 384 0186 01       		.uleb128 0x1
+ 385 0187 31       		.byte	0x31
+ 386 0188 00       		.byte	0
+ 387 0189 09       		.uleb128 0x9
+ 388 018a 84000000 		.4byte	.LVL7
+ 389 018e 12020000 		.4byte	0x212
+ 390 0192 00       		.byte	0
+ 391 0193 0C       		.uleb128 0xc
+ 392 0194 A2010000 		.4byte	.LASF22
+ 393 0198 05       		.byte	0x5
+ 394 0199 1207     		.2byte	0x712
+ 395 019b 9F010000 		.4byte	0x19f
+ 396 019f 05       		.uleb128 0x5
+ 397 01a0 8C000000 		.4byte	0x8c
+ 398 01a4 0D       		.uleb128 0xd
+ 399 01a5 B4000000 		.4byte	.LASF23
+ 400 01a9 04       		.byte	0x4
+ 401 01aa 13       		.byte	0x13
+ 402 01ab DE000000 		.4byte	0xde
+ 403 01af 0D       		.uleb128 0xd
+ 404 01b0 C0000000 		.4byte	.LASF24
+ 405 01b4 04       		.byte	0x4
+ 406 01b5 15       		.byte	0x15
+ 407 01b6 BA000000 		.4byte	0xba
+ 408 01ba 0D       		.uleb128 0xd
+ 409 01bb 5E020000 		.4byte	.LASF25
+ 410 01bf 04       		.byte	0x4
+ 411 01c0 16       		.byte	0x16
+ 412 01c1 BA000000 		.4byte	0xba
+ 413 01c5 0D       		.uleb128 0xd
+ 414 01c6 67010000 		.4byte	.LASF26
+ 415 01ca 04       		.byte	0x4
+ 416 01cb 17       		.byte	0x17
+ 417 01cc BA000000 		.4byte	0xba
+ 418 01d0 0D       		.uleb128 0xd
+ 419 01d1 48020000 		.4byte	.LASF27
+ 420 01d5 04       		.byte	0x4
+ 421 01d6 18       		.byte	0x18
+ 422 01d7 81000000 		.4byte	0x81
+ 423 01db 0E       		.uleb128 0xe
+ 424 01dc 99000000 		.4byte	.LASF28
+ 425 01e0 99000000 		.4byte	.LASF28
+ 426 01e4 04       		.byte	0x4
+ 427 01e5 1E       		.byte	0x1e
+ 428 01e6 0E       		.uleb128 0xe
+ 429 01e7 CE000000 		.4byte	.LASF29
+ 430 01eb CE000000 		.4byte	.LASF29
+ 431 01ef 04       		.byte	0x4
+ 432 01f0 1D       		.byte	0x1d
+ 433 01f1 0E       		.uleb128 0xe
+ 434 01f2 C9010000 		.4byte	.LASF30
+ 435 01f6 C9010000 		.4byte	.LASF30
+ 436 01fa 04       		.byte	0x4
+ 437 01fb 1F       		.byte	0x1f
+ 438 01fc 0E       		.uleb128 0xe
+ 439 01fd 9D020000 		.4byte	.LASF31
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 10
+
+
+ 440 0201 9D020000 		.4byte	.LASF31
+ 441 0205 06       		.byte	0x6
+ 442 0206 76       		.byte	0x76
+ 443 0207 0E       		.uleb128 0xe
+ 444 0208 12020000 		.4byte	.LASF32
+ 445 020c 12020000 		.4byte	.LASF32
+ 446 0210 04       		.byte	0x4
+ 447 0211 1B       		.byte	0x1b
+ 448 0212 0E       		.uleb128 0xe
+ 449 0213 E4010000 		.4byte	.LASF33
+ 450 0217 E4010000 		.4byte	.LASF33
+ 451 021b 04       		.byte	0x4
+ 452 021c 1C       		.byte	0x1c
+ 453 021d 00       		.byte	0
+ 454              		.section	.debug_abbrev,"",%progbits
+ 455              	.Ldebug_abbrev0:
+ 456 0000 01       		.uleb128 0x1
+ 457 0001 11       		.uleb128 0x11
+ 458 0002 01       		.byte	0x1
+ 459 0003 25       		.uleb128 0x25
+ 460 0004 0E       		.uleb128 0xe
+ 461 0005 13       		.uleb128 0x13
+ 462 0006 0B       		.uleb128 0xb
+ 463 0007 03       		.uleb128 0x3
+ 464 0008 0E       		.uleb128 0xe
+ 465 0009 1B       		.uleb128 0x1b
+ 466 000a 0E       		.uleb128 0xe
+ 467 000b 55       		.uleb128 0x55
+ 468 000c 17       		.uleb128 0x17
+ 469 000d 11       		.uleb128 0x11
+ 470 000e 01       		.uleb128 0x1
+ 471 000f 10       		.uleb128 0x10
+ 472 0010 17       		.uleb128 0x17
+ 473 0011 00       		.byte	0
+ 474 0012 00       		.byte	0
+ 475 0013 02       		.uleb128 0x2
+ 476 0014 24       		.uleb128 0x24
+ 477 0015 00       		.byte	0
+ 478 0016 0B       		.uleb128 0xb
+ 479 0017 0B       		.uleb128 0xb
+ 480 0018 3E       		.uleb128 0x3e
+ 481 0019 0B       		.uleb128 0xb
+ 482 001a 03       		.uleb128 0x3
+ 483 001b 0E       		.uleb128 0xe
+ 484 001c 00       		.byte	0
+ 485 001d 00       		.byte	0
+ 486 001e 03       		.uleb128 0x3
+ 487 001f 16       		.uleb128 0x16
+ 488 0020 00       		.byte	0
+ 489 0021 03       		.uleb128 0x3
+ 490 0022 0E       		.uleb128 0xe
+ 491 0023 3A       		.uleb128 0x3a
+ 492 0024 0B       		.uleb128 0xb
+ 493 0025 3B       		.uleb128 0x3b
+ 494 0026 0B       		.uleb128 0xb
+ 495 0027 49       		.uleb128 0x49
+ 496 0028 13       		.uleb128 0x13
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 11
+
+
+ 497 0029 00       		.byte	0
+ 498 002a 00       		.byte	0
+ 499 002b 04       		.uleb128 0x4
+ 500 002c 24       		.uleb128 0x24
+ 501 002d 00       		.byte	0
+ 502 002e 0B       		.uleb128 0xb
+ 503 002f 0B       		.uleb128 0xb
+ 504 0030 3E       		.uleb128 0x3e
+ 505 0031 0B       		.uleb128 0xb
+ 506 0032 03       		.uleb128 0x3
+ 507 0033 08       		.uleb128 0x8
+ 508 0034 00       		.byte	0
+ 509 0035 00       		.byte	0
+ 510 0036 05       		.uleb128 0x5
+ 511 0037 35       		.uleb128 0x35
+ 512 0038 00       		.byte	0
+ 513 0039 49       		.uleb128 0x49
+ 514 003a 13       		.uleb128 0x13
+ 515 003b 00       		.byte	0
+ 516 003c 00       		.byte	0
+ 517 003d 06       		.uleb128 0x6
+ 518 003e 04       		.uleb128 0x4
+ 519 003f 01       		.byte	0x1
+ 520 0040 0B       		.uleb128 0xb
+ 521 0041 0B       		.uleb128 0xb
+ 522 0042 49       		.uleb128 0x49
+ 523 0043 13       		.uleb128 0x13
+ 524 0044 3A       		.uleb128 0x3a
+ 525 0045 0B       		.uleb128 0xb
+ 526 0046 3B       		.uleb128 0x3b
+ 527 0047 0B       		.uleb128 0xb
+ 528 0048 01       		.uleb128 0x1
+ 529 0049 13       		.uleb128 0x13
+ 530 004a 00       		.byte	0
+ 531 004b 00       		.byte	0
+ 532 004c 07       		.uleb128 0x7
+ 533 004d 28       		.uleb128 0x28
+ 534 004e 00       		.byte	0
+ 535 004f 03       		.uleb128 0x3
+ 536 0050 0E       		.uleb128 0xe
+ 537 0051 1C       		.uleb128 0x1c
+ 538 0052 0B       		.uleb128 0xb
+ 539 0053 00       		.byte	0
+ 540 0054 00       		.byte	0
+ 541 0055 08       		.uleb128 0x8
+ 542 0056 2E       		.uleb128 0x2e
+ 543 0057 01       		.byte	0x1
+ 544 0058 3F       		.uleb128 0x3f
+ 545 0059 19       		.uleb128 0x19
+ 546 005a 03       		.uleb128 0x3
+ 547 005b 0E       		.uleb128 0xe
+ 548 005c 3A       		.uleb128 0x3a
+ 549 005d 0B       		.uleb128 0xb
+ 550 005e 3B       		.uleb128 0x3b
+ 551 005f 0B       		.uleb128 0xb
+ 552 0060 27       		.uleb128 0x27
+ 553 0061 19       		.uleb128 0x19
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 12
+
+
+ 554 0062 49       		.uleb128 0x49
+ 555 0063 13       		.uleb128 0x13
+ 556 0064 8701     		.uleb128 0x87
+ 557 0066 19       		.uleb128 0x19
+ 558 0067 11       		.uleb128 0x11
+ 559 0068 01       		.uleb128 0x1
+ 560 0069 12       		.uleb128 0x12
+ 561 006a 06       		.uleb128 0x6
+ 562 006b 40       		.uleb128 0x40
+ 563 006c 18       		.uleb128 0x18
+ 564 006d 9742     		.uleb128 0x2117
+ 565 006f 19       		.uleb128 0x19
+ 566 0070 01       		.uleb128 0x1
+ 567 0071 13       		.uleb128 0x13
+ 568 0072 00       		.byte	0
+ 569 0073 00       		.byte	0
+ 570 0074 09       		.uleb128 0x9
+ 571 0075 898201   		.uleb128 0x4109
+ 572 0078 00       		.byte	0
+ 573 0079 11       		.uleb128 0x11
+ 574 007a 01       		.uleb128 0x1
+ 575 007b 31       		.uleb128 0x31
+ 576 007c 13       		.uleb128 0x13
+ 577 007d 00       		.byte	0
+ 578 007e 00       		.byte	0
+ 579 007f 0A       		.uleb128 0xa
+ 580 0080 898201   		.uleb128 0x4109
+ 581 0083 01       		.byte	0x1
+ 582 0084 11       		.uleb128 0x11
+ 583 0085 01       		.uleb128 0x1
+ 584 0086 31       		.uleb128 0x31
+ 585 0087 13       		.uleb128 0x13
+ 586 0088 01       		.uleb128 0x1
+ 587 0089 13       		.uleb128 0x13
+ 588 008a 00       		.byte	0
+ 589 008b 00       		.byte	0
+ 590 008c 0B       		.uleb128 0xb
+ 591 008d 8A8201   		.uleb128 0x410a
+ 592 0090 00       		.byte	0
+ 593 0091 02       		.uleb128 0x2
+ 594 0092 18       		.uleb128 0x18
+ 595 0093 9142     		.uleb128 0x2111
+ 596 0095 18       		.uleb128 0x18
+ 597 0096 00       		.byte	0
+ 598 0097 00       		.byte	0
+ 599 0098 0C       		.uleb128 0xc
+ 600 0099 34       		.uleb128 0x34
+ 601 009a 00       		.byte	0
+ 602 009b 03       		.uleb128 0x3
+ 603 009c 0E       		.uleb128 0xe
+ 604 009d 3A       		.uleb128 0x3a
+ 605 009e 0B       		.uleb128 0xb
+ 606 009f 3B       		.uleb128 0x3b
+ 607 00a0 05       		.uleb128 0x5
+ 608 00a1 49       		.uleb128 0x49
+ 609 00a2 13       		.uleb128 0x13
+ 610 00a3 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 13
+
+
+ 611 00a4 19       		.uleb128 0x19
+ 612 00a5 3C       		.uleb128 0x3c
+ 613 00a6 19       		.uleb128 0x19
+ 614 00a7 00       		.byte	0
+ 615 00a8 00       		.byte	0
+ 616 00a9 0D       		.uleb128 0xd
+ 617 00aa 34       		.uleb128 0x34
+ 618 00ab 00       		.byte	0
+ 619 00ac 03       		.uleb128 0x3
+ 620 00ad 0E       		.uleb128 0xe
+ 621 00ae 3A       		.uleb128 0x3a
+ 622 00af 0B       		.uleb128 0xb
+ 623 00b0 3B       		.uleb128 0x3b
+ 624 00b1 0B       		.uleb128 0xb
+ 625 00b2 49       		.uleb128 0x49
+ 626 00b3 13       		.uleb128 0x13
+ 627 00b4 3F       		.uleb128 0x3f
+ 628 00b5 19       		.uleb128 0x19
+ 629 00b6 3C       		.uleb128 0x3c
+ 630 00b7 19       		.uleb128 0x19
+ 631 00b8 00       		.byte	0
+ 632 00b9 00       		.byte	0
+ 633 00ba 0E       		.uleb128 0xe
+ 634 00bb 2E       		.uleb128 0x2e
+ 635 00bc 00       		.byte	0
+ 636 00bd 3F       		.uleb128 0x3f
+ 637 00be 19       		.uleb128 0x19
+ 638 00bf 3C       		.uleb128 0x3c
+ 639 00c0 19       		.uleb128 0x19
+ 640 00c1 6E       		.uleb128 0x6e
+ 641 00c2 0E       		.uleb128 0xe
+ 642 00c3 03       		.uleb128 0x3
+ 643 00c4 0E       		.uleb128 0xe
+ 644 00c5 3A       		.uleb128 0x3a
+ 645 00c6 0B       		.uleb128 0xb
+ 646 00c7 3B       		.uleb128 0x3b
+ 647 00c8 0B       		.uleb128 0xb
+ 648 00c9 00       		.byte	0
+ 649 00ca 00       		.byte	0
+ 650 00cb 00       		.byte	0
+ 651              		.section	.debug_aranges,"",%progbits
+ 652 0000 1C000000 		.4byte	0x1c
+ 653 0004 0200     		.2byte	0x2
+ 654 0006 00000000 		.4byte	.Ldebug_info0
+ 655 000a 04       		.byte	0x4
+ 656 000b 00       		.byte	0
+ 657 000c 0000     		.2byte	0
+ 658 000e 0000     		.2byte	0
+ 659 0010 00000000 		.4byte	.LFB63
+ 660 0014 CC000000 		.4byte	.LFE63-.LFB63
+ 661 0018 00000000 		.4byte	0
+ 662 001c 00000000 		.4byte	0
+ 663              		.section	.debug_ranges,"",%progbits
+ 664              	.Ldebug_ranges0:
+ 665 0000 00000000 		.4byte	.LFB63
+ 666 0004 CC000000 		.4byte	.LFE63
+ 667 0008 00000000 		.4byte	0
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 14
+
+
+ 668 000c 00000000 		.4byte	0
+ 669              		.section	.debug_line,"",%progbits
+ 670              	.Ldebug_line0:
+ 671 0000 4F010000 		.section	.debug_str,"MS",%progbits,1
+ 671      02002101 
+ 671      00000201 
+ 671      FB0E0D00 
+ 671      01010101 
+ 672              	.LASF4:
+ 673 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 673      6E74385F 
+ 673      7400
+ 674              	.LASF36:
+ 675 000a 443A5C4D 		.ascii	"D:\\MS\\HDA\\Embedded\\Second_sem\\System_Driven_Ha"
+ 675      535C4844 
+ 675      415C456D 
+ 675      62656464 
+ 675      65645C53 
+ 676 0038 72647761 		.ascii	"rdware_Design\\Lab3_Lab4\\Final_after_updates\\Fina"
+ 676      72655F44 
+ 676      65736967 
+ 676      6E5C4C61 
+ 676      62335F4C 
+ 677 0068 6C5F4465 		.ascii	"l_Design.cydsn\\Final_Design.cydsn\000"
+ 677      7369676E 
+ 677      2E637964 
+ 677      736E5C46 
+ 677      696E616C 
+ 678              	.LASF5:
+ 679 008a 5F5F696E 		.ascii	"__int32_t\000"
+ 679      7433325F 
+ 679      7400
+ 680              	.LASF18:
+ 681 0094 49444C45 		.ascii	"IDLE\000"
+ 681      00
+ 682              	.LASF28:
+ 683 0099 696E6974 		.ascii	"initializeHardware\000"
+ 683      69616C69 
+ 683      7A654861 
+ 683      72647761 
+ 683      726500
+ 684              	.LASF12:
+ 685 00ac 696E7433 		.ascii	"int32_t\000"
+ 685      325F7400 
+ 686              	.LASF23:
+ 687 00b4 73746174 		.ascii	"state\000"
+ 687      6500
+ 688              	.LASF13:
+ 689 00ba 666C6F61 		.ascii	"float\000"
+ 689      7400
+ 690              	.LASF24:
+ 691 00c0 62757474 		.ascii	"buttonPressed\000"
+ 691      6F6E5072 
+ 691      65737365 
+ 691      6400
+ 692              	.LASF29:
+ 693 00ce 75706461 		.ascii	"updateLEDs\000"
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 15
+
+
+ 693      74654C45 
+ 693      447300
+ 694              	.LASF34:
+ 695 00d9 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 695      43313120 
+ 695      352E342E 
+ 695      31203230 
+ 695      31363036 
+ 696 010c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 696      20726576 
+ 696      6973696F 
+ 696      6E203233 
+ 696      37373135 
+ 697 013f 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 697      66756E63 
+ 697      74696F6E 
+ 697      2D736563 
+ 697      74696F6E 
+ 698              	.LASF26:
+ 699 0167 75617274 		.ascii	"uart_o_received\000"
+ 699      5F6F5F72 
+ 699      65636569 
+ 699      76656400 
+ 700              	.LASF7:
+ 701 0177 6C6F6E67 		.ascii	"long unsigned int\000"
+ 701      20756E73 
+ 701      69676E65 
+ 701      6420696E 
+ 701      7400
+ 702              	.LASF3:
+ 703 0189 73686F72 		.ascii	"short unsigned int\000"
+ 703      7420756E 
+ 703      7369676E 
+ 703      65642069 
+ 703      6E7400
+ 704              	.LASF21:
+ 705 019c 53746174 		.ascii	"State\000"
+ 705      6500
+ 706              	.LASF22:
+ 707 01a2 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 707      52784275 
+ 707      66666572 
+ 707      00
+ 708              	.LASF1:
+ 709 01af 756E7369 		.ascii	"unsigned char\000"
+ 709      676E6564 
+ 709      20636861 
+ 709      7200
+ 710              	.LASF14:
+ 711 01bd 646F7562 		.ascii	"double\000"
+ 711      6C6500
+ 712              	.LASF37:
+ 713 01c4 6D61696E 		.ascii	"main\000"
+ 713      00
+ 714              	.LASF30:
+ 715 01c9 666C7573 		.ascii	"flushRxBuffer\000"
+ 715      68527842 
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 16
+
+
+ 715      75666665 
+ 715      7200
+ 716              	.LASF10:
+ 717 01d7 756E7369 		.ascii	"unsigned int\000"
+ 717      676E6564 
+ 717      20696E74 
+ 717      00
+ 718              	.LASF33:
+ 719 01e4 75617274 		.ascii	"uartSendBuffer\000"
+ 719      53656E64 
+ 719      42756666 
+ 719      657200
+ 720              	.LASF9:
+ 721 01f3 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 721      206C6F6E 
+ 721      6720756E 
+ 721      7369676E 
+ 721      65642069 
+ 722              	.LASF11:
+ 723 020a 75696E74 		.ascii	"uint8_t\000"
+ 723      385F7400 
+ 724              	.LASF32:
+ 725 0212 73616D70 		.ascii	"sampleADC\000"
+ 725      6C654144 
+ 725      4300
+ 726              	.LASF17:
+ 727 021c 73697A65 		.ascii	"sizetype\000"
+ 727      74797065 
+ 727      00
+ 728              	.LASF8:
+ 729 0225 6C6F6E67 		.ascii	"long long int\000"
+ 729      206C6F6E 
+ 729      6720696E 
+ 729      7400
+ 730              	.LASF19:
+ 731 0233 53414D50 		.ascii	"SAMPLING\000"
+ 731      4C494E47 
+ 731      00
+ 732              	.LASF35:
+ 733 023c 6D61696E 		.ascii	"main.c\000"
+ 733      2E6300
+ 734              	.LASF15:
+ 735 0243 63686172 		.ascii	"char\000"
+ 735      00
+ 736              	.LASF27:
+ 737 0248 73616D70 		.ascii	"sampleCount\000"
+ 737      6C65436F 
+ 737      756E7400 
+ 738              	.LASF2:
+ 739 0254 73686F72 		.ascii	"short int\000"
+ 739      7420696E 
+ 739      7400
+ 740              	.LASF25:
+ 741 025e 75617274 		.ascii	"uart_s_received\000"
+ 741      5F735F72 
+ 741      65636569 
+ 741      76656400 
+ARM GAS  C:\Users\DHEERA~1\AppData\Local\Temp\ccaRMbHK.s 			page 17
+
+
+ 742              	.LASF6:
+ 743 026e 6C6F6E67 		.ascii	"long int\000"
+ 743      20696E74 
+ 743      00
+ 744              	.LASF16:
+ 745 0277 6C6F6E67 		.ascii	"long double\000"
+ 745      20646F75 
+ 745      626C6500 
+ 746              	.LASF0:
+ 747 0283 7369676E 		.ascii	"signed char\000"
+ 747      65642063 
+ 747      68617200 
+ 748              	.LASF20:
+ 749 028f 55415254 		.ascii	"UART_TRANSFER\000"
+ 749      5F545241 
+ 749      4E534645 
+ 749      5200
+ 750              	.LASF31:
+ 751 029d 43794465 		.ascii	"CyDelay\000"
+ 751      6C617900 
+ 752              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

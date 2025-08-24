@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Final_Design-000\Final_Design\Header Files\functions.h">
+<ExpandedNodeIds>
+<v>Final_Design-000</v>
+<v>Final_Design-000\Final_Design</v>
+<v>Final_Design-000\Final_Design\TopDesign</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Pins</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Analog</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Clocks</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Interrupts</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\DMA</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\System</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Directives</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Flash Security</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\EEPROM</v>
+<v>Final_Design-000\Final_Design\Header Files</v>
+<v>Final_Design-000\Final_Design\Header Files\cyapicallbacks.h</v>
+<v>Final_Design-000\Final_Design\Header Files\functions.h</v>
+<v>Final_Design-000\Final_Design\Source Files</v>
+<v>Final_Design-000\Final_Design\Source Files\functions.c</v>
+<v>Final_Design-000\Final_Design\Source Files\main.c</v>
+<v>Final_Design-000\Final_Design\Generated_Source</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Final_Design-000</v>
+<v>Final_Design-000\Final_Design</v>
+<v>Final_Design-000\Final_Design\TopDesign</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Pins</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Analog</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Clocks</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Interrupts</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\DMA</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\System</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Directives</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\Flash Security</v>
+<v>Final_Design-000\Final_Design\Final_Design.cydwr\EEPROM</v>
+<v>Final_Design-000\Final_Design\Header Files</v>
+<v>Final_Design-000\Final_Design\Header Files\cyapicallbacks.h</v>
+<v>Final_Design-000\Final_Design\Header Files\functions.h</v>
+<v>Final_Design-000\Final_Design\Source Files</v>
+<v>Final_Design-000\Final_Design\Source Files\functions.c</v>
+<v>Final_Design-000\Final_Design\Source Files\main.c</v>
+<v>Final_Design-000\Final_Design\Generated_Source</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\ADC</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\ADC_AMux</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\ADC_Ext_CP_Clk</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\ADC_In</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\ADC_IRQ</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\ADC_theACLK</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\Button</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\cy_boot</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\DACout</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\INT_ADC</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\isr_Button</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\isr_UART</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\led_green</v>
+<v>Final_Design-000\Final_Design\Generated_Source\PSoC5\led_orange</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Final_Design-000</v>
+<v>Final_Design-000\Final_Design</v>
+<v>Final_Design-000\Final_Design\TopDesign</v>
+<v>Final_Design-000\Final_Design\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Final_Design-000</v>
+<v>Final_Design-000\Final_Design</v>
+<v>Final_Design-000\Final_Design\TopDesign</v>
+<v>Final_Design-000\Final_Design\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Final_Design-000</v>
+<v>Final_Design-000\Final_Design</v>
+<v>Final_Design-000\Final_Design\CortexM3</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_AMux.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_Ext_CP_Clk.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_In.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_INT.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_IRQ.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_PM.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_theACLK.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\Button.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\DACout.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\functions.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\INT_ADC.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Button.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_UART.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\led_green.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\led_orange.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\led_red.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_LOG.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_LOG_BOOT.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_LOG_INT.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_LOG_IntClock.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_LOG_PM.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\WaveDAC8_1.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\WaveDAC8_1_DacClk.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\WaveDAC8_1_PM.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\WaveDAC8_1_VDAC8.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\WaveDAC8_1_VDAC8_PM.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\WaveDAC8_1_Wave1_DMA_dma.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\WaveDAC8_1_Wave2_DMA_dma.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Final_Design.elf</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Final_Design.hex</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Final_Design.map</v>
+<v>Final_Design-000\Final_Design\Final_Design.gpdsc</v>
+<v>Final_Design-000\Final_Design\Final_Design.rpt</v>
+<v>Final_Design-000\Final_Design\Final_Design_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Final_Design-000</v>
+<v>Final_Design-000\Final_Design</v>
+<v>Final_Design-000\Final_Design\CortexM3</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_AMux.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_Ext_CP_Clk.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_In.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_INT.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_IRQ.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_PM.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_theACLK.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\Button.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\DACout.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\functions.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\INT_ADC.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Button.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_UART.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\led_green.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\led_orange.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\led_red.lst</v>
+<v>Final_Design-000\Final_Design\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Final_Design-000</v>
+<v>Final_Design-000\Final_Design</v>
+<v>Final_Design-000\Final_Design\PSoC 5LP Architecture TRM</v>
+<v>Final_Design-000\Final_Design\CY8C58LP Family Datasheet</v>
+<v>Final_Design-000\Final_Design\System Reference Guides</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Final_Design-000</v>
+<v>Final_Design-000\Final_Design</v>
+<v>Final_Design-000\Final_Design\PSoC 5LP Architecture TRM</v>
+<v>Final_Design-000\Final_Design\CY8C58LP Family Datasheet</v>
+<v>Final_Design-000\Final_Design\System Reference Guides</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\TopDesign\TopDesign.cysch" />
+<name v=".\main.c" />
+<name v=".\functions.h" />
+<name v=".\functions.c" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1165, 551" SelectedTabbedMdiWindow="43c06311-df4e-420a-a218-c559cb3ca910"><DocumentWindow Key="D:\MS\HDA\Embedded\Second_sem\System_Driven_Hardware_Design\Lab3_Lab4\Final_Integrated\Final_after_updates\Final_Design.cydsn\Final_Design.cydsn\TopDesign\TopDesign.cysch" Guid="09ec34b5-32b5-41af-90e8-7d6d5258eb26" /><DocumentWindow Key="D:\MS\HDA\Embedded\Second_sem\System_Driven_Hardware_Design\Lab3_Lab4\Final_Integrated\Final_after_updates\Final_Design.cydsn\Final_Design.cydsn\main.c" Guid="3dfe877c-fa64-41ec-9590-9d55d1d55f7e" /><DocumentWindow Key="D:\MS\HDA\Embedded\Second_sem\System_Driven_Hardware_Design\Lab3_Lab4\Final_Integrated\Final_after_updates\Final_Design.cydsn\Final_Design.cydsn\functions.h" Guid="3a053d2c-a333-4515-92c7-d1c5460be85e" /><DocumentWindow Key="D:\MS\HDA\Embedded\Second_sem\System_Driven_Hardware_Design\Lab3_Lab4\Final_Integrated\Final_after_updates\Final_Design.cydsn\Final_Design.cydsn\functions.c" Guid="be2f0286-3270-4bd5-8d76-73afd54f1d74" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="43c06311-df4e-420a-a218-c559cb3ca910" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

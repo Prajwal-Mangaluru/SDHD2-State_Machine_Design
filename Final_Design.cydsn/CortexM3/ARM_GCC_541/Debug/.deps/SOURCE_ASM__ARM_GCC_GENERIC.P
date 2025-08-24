@@ -1,0 +1,10 @@
+D:/MS/HDA/Embedded/Second_sem/System_Driven_Hardware_Design/Lab3_Lab4/Final_after_updates/Final_Design.cydsn/Final_Design.cydsn/CortexM3/ARM_GCC_541/Debug/CyBootAsmGnu.o : D:/MS/HDA/Embedded/Second_sem/System_Driven_Hardware_Design/Lab3_Lab4/Final_after_updates/Final_Design.cydsn/Final_Design.cydsn/Generated_Source/PSoC5/CyBootAsmGnu.s D:/MS/HDA/Embedded/Second_sem/System_Driven_Hardware_Design/Lab3_Lab4/Final_after_updates/Final_Design.cydsn/Final_Design.cydsn/Generated_Source/PSoC5/cydevicegnu.inc D:/MS/HDA/Embedded/Second_sem/System_Driven_Hardware_Design/Lab3_Lab4/Final_after_updates/Final_Design.cydsn/Final_Design.cydsn/Generated_Source/PSoC5/cydevicegnu_trm.inc D:/MS/HDA/Embedded/Second_sem/System_Driven_Hardware_Design/Lab3_Lab4/Final_after_updates/Final_Design.cydsn/Final_Design.cydsn/Generated_Source/PSoC5/cyfittergnu.inc 
+
+D:/MS/HDA/Embedded/Second_sem/System_Driven_Hardware_Design/Lab3_Lab4/Final_after_updates/Final_Design.cydsn/Final_Design.cydsn/Generated_Source/PSoC5/CyBootAsmGnu.s : 
+
+D:/MS/HDA/Embedded/Second_sem/System_Driven_Hardware_Design/Lab3_Lab4/Final_after_updates/Final_Design.cydsn/Final_Design.cydsn/Generated_Source/PSoC5/cydevicegnu.inc : 
+
+D:/MS/HDA/Embedded/Second_sem/System_Driven_Hardware_Design/Lab3_Lab4/Final_after_updates/Final_Design.cydsn/Final_Design.cydsn/Generated_Source/PSoC5/cydevicegnu_trm.inc : 
+
+D:/MS/HDA/Embedded/Second_sem/System_Driven_Hardware_Design/Lab3_Lab4/Final_after_updates/Final_Design.cydsn/Final_Design.cydsn/Generated_Source/PSoC5/cyfittergnu.inc : 
+
